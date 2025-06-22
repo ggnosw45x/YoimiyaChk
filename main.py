@@ -22,23 +22,23 @@ stopuser={}
 command_usage = {}
 values_list = []
 group='x8_es'
-botuser='mo3gza_bot'
+botuser='yoimiyachk_bot'
 userdeve='The_E4'
-namebot='KAYAN'
+namebot='Jony'
 trc='TFdNRJuEcCssv8jzLbiqioSS4QZSmkZudq'
 cash='Nothing'
 scj = {
 			'file_name': 'xx',
 			'reply_to_message_id': 'xx'}
-admin=972363052
+admin=5986416702
 files_to_download = {}
 stopuser={}
 files_to_download['4070'] = {
 			'file_name': 'xx',
 			'reply_to_message_id': 'xx'
 		}
-tok='668TTmDKX6u2nnc3gV_AeI'
-chat_id = 972363052
+tok='8042902599:AAE1bpMPPxiP9ZCyL27it-FbLgb2BWkAEoE'
+chat_id = 5986416702
 bot = telebot.TeleBot(tok,parse_mode='HTML')
 def c():
 		lines='''cvv
