@@ -1,4 +1,5 @@
 import requests
+from faker import faker
 import re
 import random
 import time
@@ -2537,62 +2538,47 @@ xelize%7C1714659196%7CGK2uQtKawDYRsGHylTYY7lS6lg8sF8QkiKpT2kMV8Le%7Cd2df2a557616
 	else:
 		
 		return result
+
 def generate_fake_address():
-    user = user_agent.generate_user_agent()
-    headers = {'user-agent': user}
-    r = requests.session()
-    response = r.get('https://www.prepostseo.com/tool/fake-address-generator', headers=headers)
-    response = r.get('https://www.prepostseo.com/tool/fake-address-generator', headers=headers, cookies=r.cookies)
-    tok = response.text.split('name="_token" content="')[1].split('" />')[0]
-
-    # تحديث الهيدرز مع التوكن
-    headers.update({
-        'x-csrf-token': tok,
-        'x-requested-with': 'XMLHttpRequest',
-    })
-
-    # البيانات لإرسال الطلب
-    data = {'lang': 'en_US'}
-
-    # إرسال الطلب للحصول على البيانات المزيفة
-    response = r.post('https://www.prepostseo.com/ajax/fake-address-generator', cookies=r.cookies, data=data, headers=headers).json()
-    extracted_data = response[0]
+    fake = Faker('en_US')
+    credit_name = fake.name()
     return {
-        'name': extracted_data['name'],
-        'email': extracted_data['email'],
-        'phone': extracted_data['phone'],
-        'postcode': extracted_data['postcode'],
-        'street_address': extracted_data['streetAddress'],
-        'city': extracted_data['city'],
-        'country': extracted_data['country'],
-        'state': extracted_data['state'],
-        'company': extracted_data['company'],
-        'gender': extracted_data['gender'],
-        'credit_name': extracted_data['credit']['name'],
-        'first_name': extracted_data['credit']['name'].split(' ')[0],
-        'last_name': extracted_data['credit']['name'].split(' ')[1],
-        'credit_expiration_date': extracted_data['credit']['expirationDate'],
-        'account_no': extracted_data['accountNo'],
-        'username': extracted_data['username'],
-        'password': extracted_data['passw'],
-        'ipv4': extracted_data['ipv4'],
-        'ipv6': extracted_data['ipv6'],
-        'mac_address': extracted_data['macad'],
-        'semail': extracted_data['semail'],
-        'user_agent': extracted_data['uagent'],
-        'job_title': extracted_data['jobtitle'],
-        'com_email': extracted_data['comemail'],
-        'salary': extracted_data['salary'],
-        'iban': extracted_data['iban'],
-        'dob': extracted_data['dob'],
-        'age': extracted_data['age'],
-        'height': extracted_data['height'],
-        'weight': extracted_data['weight'],
-        'hair': extracted_data['hair'],
-        'eye': extracted_data['eye'],
-        'bank': extracted_data['bank'],
-        'bcode': extracted_data['bcode']
+        'name': credit_name,
+        'email': fake.email(),
+        'phone': fake.phone_number(),
+        'postcode': fake.postcode(),
+        'street_address': fake.street_address(),
+        'city': fake.city(),
+        'country': fake.country(),
+        'state': fake.state(),
+        'company': fake.company(),
+        'gender': fake.random_element(elements=('Male', 'Female')),
+        'credit_name': credit_name,
+        'first_name': credit_name.split(' ')[0],
+        'last_name': credit_name.split(' ')[1] if len(credit_name.split(' ')) > 1 else '',
+        'credit_expiration_date': fake.credit_card_expire(),
+        'account_no': fake.bban(),
+        'username': fake.user_name(),
+        'password': fake.password(),
+        'ipv4': fake.ipv4(),
+        'ipv6': fake.ipv6(),
+        'mac_address': fake.mac_address(),
+        'semail': fake.email(),
+        'user_agent': fake.user_agent(),
+        'job_title': fake.job(),
+        'com_email': fake.company_email(),
+        'salary': f"${fake.random_int(30000, 120000)}",
+        'iban': fake.iban(),
+        'dob': str(fake.date_of_birth()),
+        'age': fake.random_int(18, 65),
+        'height': f"{fake.random_int(150, 200)} cm",
+        'weight': f"{fake.random_int(50, 120)} kg",
+        'hair': fake.color_name(),
+        'eye': fake.color_name(),
+        'bank': fake.company(),
+        'bcode': fake.swift8()
     }
+	    
 data = generate_fake_address()
 name = data['name']
 email = data['email']
